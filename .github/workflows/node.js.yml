@@ -53,3 +53,6 @@ jobs:
 
     - name: Ansible Version
       run: echo "ansible version=$(ansible --version)"
+
+    - name: Ensure botocore and boto3 modules are installed
+      run : pip install boto3 botocore
