@@ -71,7 +71,7 @@ jobs:
       run: sudo apt install tree -y
 
     - name: Tree
-      run: tree
+      run: tree -L 3
 
     - name: Ansible Inventory
       run: |
