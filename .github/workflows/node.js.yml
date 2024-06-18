@@ -57,13 +57,13 @@ jobs:
     - name: Ensure botocore and boto3 modules are installed
       run : pip install boto3 botocore
 
-    - name: ansible graph
-      run: | 
-        ansible-inventory -i aws_ec2.yaml --graph -vvv
-      working-directory: ansible
-
-    # - name: Run Ansible Playbook
-    #   run: ansible-playbook -i aws_ec2.yaml configure.yaml
+    # - name: ansible graph
+    #   run: | 
+    #     ansible-inventory -i aws_ec2.yaml --graph -vvv
     #   working-directory: ansible
-    #   env:
-    #     ANSIBLE_HOST_KEY_CHECKING: false
+
+    - name: Run Ansible Playbook
+      run: ansible-playbook -i aws_ec2.yaml configure.yaml
+      working-directory: ansible
+      env:
+        ANSIBLE_HOST_KEY_CHECKING: false
