@@ -5,7 +5,7 @@ resource "aws_instance" "prashansa_ansible_ec2" {
   key_name                    = var.key_name
   vpc_security_group_ids      = [var.sg_id]
   associate_public_ip_address = "true"
-  iam_instance_profile        = "sameep_iam_instance_profile"
+  iam_instance_profile        = aws_iam_instance_profile.this.name
 
   tags = {
     Name        = "prashansa-ec2"
