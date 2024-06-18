@@ -1,0 +1,10 @@
+plugin: amazon.aws.aws_ec2
+regions:
+  - us-east-1
+hostnames:
+  - instance-id
+groups:
+  Dev: "'prashansa-ec2' in tags.Name"
+filters:
+  tag:Name: "prashansa-ec2"
+  instance-state-name: running

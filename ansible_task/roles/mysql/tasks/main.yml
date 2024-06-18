@@ -1,0 +1,33 @@
+    - name: Install Mysql
+      package:
+        name: "{{item}}"
+        state: present
+        update_cache: yes
+      loop:
+        - mysql-server
+        - python3-mysqldb
+        - libmysqlclient-dev
+
+
+    - name: Create MYSQL db
+      mysql_db:
+        name: "{{mysql_database}}"
+        state: present
+        login_user: root
+        login_password:
+
+
+    - name: Create MySQL user
+      mysql_user:
+        name: "{{mysql_user}}"
+        password: "{{mysql_password}}"
+        priv: "*.*:ALL" 
+        host: localhost
+        state: present
+
+    # - name: Import database dump into app_db
+    #   mysql_db:
+    #     name: "{{mysql_database}}"
+    #     state: import
+    #     target: /var/www/html/db.sql
+    #   become: true

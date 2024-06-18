@@ -1,0 +1,13 @@
+- name: Install node and npm
+  ansible.builtin.apt:
+    pkg:
+      - npm
+      - nodejs
+    state: present
+    update_cache: true
+
+
+- name: Install PM2 globally
+  npm:
+    name: pm2
+    global: yes

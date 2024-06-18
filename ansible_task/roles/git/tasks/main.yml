@@ -1,0 +1,5 @@
+- name: Clone the GitHub repository
+  git:
+    repo: https://github.com/SameepSig/Node_React_CRUD
+    dest: /home/ubuntu/php_folder
+    force: yes
