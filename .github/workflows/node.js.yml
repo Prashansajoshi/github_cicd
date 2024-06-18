@@ -1,0 +1,70 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+name: Node.js CI
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Echo Hello World
+      run: echo "Hello World"
+
+    - name: Configure aws credentials
+      uses: aws-action/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+        aws-region: us-east-1
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_wrapper: false
+
+    - name: Terraform Version
+      run: echo "Terraform version=$(terraform --version)"
+
+    - name: Terraform Init
+      run: terraform init
+      working-directory: terraform
+
+    - name: Terraform Plan
+      run: terraform plan
+      working-directory: terraform
+
+    - name: Terraform Apply
+      run: terraform apply -auto-approve
+      working-directory: terraform 
+
+    - name: Install ansible
+      run: pip install ansible
+
+    - name: Ansible Version
+      run: echo "ansible version=$(ansible --version)"
+
+    - name: Ensure botocore and boto3 modules are installed
+      run : pip install boto3 botocore
+
+    - name: ansible graph
+      run: | 
+        ls -la
+        ansible-inventory -i ansible/aws_ec2.yaml --graph
+
+
+    # - name: Run Ansible Playbook
+    #   run: ansible-playbook -i aws_ec2.yaml configure.yaml
+    #   working-directory: ansible
+    #   env:
+    #     ANSIBLE_HOST_KEY_CHECKING: false
