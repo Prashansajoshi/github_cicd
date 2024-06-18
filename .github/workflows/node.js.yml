@@ -47,4 +47,6 @@ jobs:
     - name: Terraform Apply
       run: terraform apply -auto-approve
       working-directory: terraform 
-      
+
+    - name: Install ansible
+      run: pip install ansible
