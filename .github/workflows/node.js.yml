@@ -76,17 +76,17 @@ jobs:
 
     - name: Ansible Inventory
       run: |
-        ansible-inventory -i ansible/aws_ec2.yml --graph
+        ansible-inventory -i ansible/aws_ec2.yaml --graph
 
     - name: Ansible Playbook
       run: |
-        ansible-playbook ansible/configure.yml -i ansible/aws_ec2.yml
+        ansible-playbook ansible/configure.yaml -i ansible/aws_ec2.yaml
 
-    - name: ansible graph
-      run: |
-        ansible all --list-hosts &&
-        ansible-inventory -i aws_ec2.yaml --graph -vvv
-      working-directory: ansible
+    # - name: ansible graph
+    #   run: |
+    #     ansible all --list-hosts &&
+    #     ansible-inventory -i aws_ec2.yaml --graph -vvv
+    #   working-directory: ansible
 
     # - name: Run Ansible Playbook
     #   run: ansible-playbook -i aws_ec2.yaml configure.yaml
