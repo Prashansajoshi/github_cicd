@@ -58,8 +58,7 @@ jobs:
       run : pip install boto3 botocore
 
     - name: ansible graph
-      run: ansible-inventory -i aws_ec2.yaml --graph
-      working-directory: ansible
+      run: ansible-inventory -i ansible/aws_ec2.yaml --graph
 
     # - name: Run Ansible Playbook
     #   run: ansible-playbook -i aws_ec2.yaml configure.yaml
