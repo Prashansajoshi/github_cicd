@@ -17,9 +17,6 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Echo Hello World
-      run: echo "Hello World"
-
     - name: Configure aws credentials
       uses: aws-action/configure-aws-credentials@v1
       with:
@@ -28,32 +25,28 @@ jobs:
         aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
         aws-region: us-east-1
 
-    - name: Setup Terraform
-      uses: hashicorp/setup-terraform@v2
-      with:
-        terraform_wrapper: false
+    - name: Echo Hello World
+      run: aws sts get-caller-identity
 
-    - name: Terraform Version
-      run: echo "Terraform version=$(terraform --version)"
+    # - name: Setup Terraform
+    #   uses: hashicorp/setup-terraform@v2
+    #   with:
+    #     terraform_wrapper: false
 
-    - name: Terraform Init
-      run: terraform init
-      working-directory: terraform
+    # - name: Terraform Version
+    #   run: echo "Terraform version=$(terraform --version)"
 
-    - name: Terraform Plan
-      run: terraform plan
-      working-directory: terraform
+    # - name: Terraform Init
+    #   run: terraform init
+    #   working-directory: terraform
 
-    - name: Terraform Apply
-      run: terraform apply -auto-approve
-      working-directory: terraform 
+    # - name: Terraform Plan
+    #   run: terraform plan
+    #   working-directory: terraform
 
-    - name: Install ansible
-      run: pip install ansible
-
-    - name: Ansible Version
-      run: echo "ansible version=$(ansible --version)"
-
+    # - name: Terraform Apply
+    #   run: terraform apply -auto-approve
+    #   working-directory: terraform 
       
     - uses: actions/setup-python@v4
       with:
@@ -76,11 +69,11 @@ jobs:
 
     - name: Ansible Inventory
       run: |
-        ansible-inventory -i ansible/aws_ec2.yaml --graph
+        ansible-inventory -i ansible/aws_ec2.yaml --graph 
 
-    - name: Ansible Playbook
-      run: |
-        ansible-playbook ansible/configure.yaml -i ansible/aws_ec2.yaml
+    # - name: Ansible Playbook
+    #   run: |
+    #     ansible-playbook ansible/configure.yaml -i ansible/aws_ec2.yaml -v
 
     # - name: ansible graph
     #   run: |
