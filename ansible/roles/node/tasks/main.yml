@@ -1,13 +1,67 @@
-- name: Install node and npm
-  ansible.builtin.apt:
-    pkg:
-      - npm
-      - nodejs
-    state: present
-    update_cache: true
+  - name: Creating backend .env file
+    copy:
+      dest: /home/ubuntu/Node_Project/backend/.env
+      content: |
+        APP_PORT=3000  
 
+        ### DB_HOST could be remote host, proxy or localhost URL but must be mysql
+        DB_HOST= "{{ DB_SERVER }}"
+        DB_PORT="{{ DB_PORT }}"
+        DB_NAME="{{ DB_NAME }}"
 
-- name: Install PM2 globally
-  npm:
-    name: pm2
-    global: yes
+        CRED= from_env
+
+        ### If you are Passing Credentials Directly from ENV
+        DB_USER= "{{ DB_USERNAME }}"
+        DB_PASSWORD= "{{ DB_PASSWORD }}"
+
+  - name: Creating frontend .env file
+    copy:
+      dest: /home/ubuntu/Node_Project/frontend/.env
+      content: |
+        VITE_API_URL=http://54.236.46.163:3000
+    
+  - name: Ensure Node.js is installed
+    apt:
+      name: nodejs
+      state: present
+      update_cache: yes
+
+  - name: Ensure npm is installed
+    apt:
+      name: npm
+      state: present
+      update_cache: yes
+
+  - name: Install pm2 globally
+    npm:
+      name: pm2
+      global: yes
+      state: present
+
+  - name: Install frontend dependencies
+    command: npm install
+    args:
+      chdir: /home/ubuntu/Node_Project/frontend
+
+  - name: Install backend dependencies
+    command: npm install
+    args:
+      chdir: /home/ubuntu/Node_Project/backend
+
+  # - name: Remove frontend and backend server if created using pm2 to avoid port conflict
+  #   command: pm2 delete frontend backend
+  #   ignore_errors: yes
+
+  - name: Start frontend server with pm2
+    command: pm2 start npm --name frontend -- run dev
+    args:
+      chdir: /home/ubuntu/Node_Project/frontend
+
+  - name: Start backend server with pm2
+    command: pm2 start index.js --name backend -f
+    args:
+      chdir: /home/ubuntu/Node_Project/backend
+
+  - name: Save pm2 process list to start on boot
+    command: pm2 save
