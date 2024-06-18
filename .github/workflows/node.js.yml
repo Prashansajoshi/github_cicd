@@ -28,25 +28,25 @@ jobs:
     - name: Echo Hello World
       run: aws sts get-caller-identity
 
-    # - name: Setup Terraform
-    #   uses: hashicorp/setup-terraform@v2
-    #   with:
-    #     terraform_wrapper: false
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_wrapper: false
 
-    # - name: Terraform Version
-    #   run: echo "Terraform version=$(terraform --version)"
+    - name: Terraform Version
+      run: echo "Terraform version=$(terraform --version)"
 
-    # - name: Terraform Init
-    #   run: terraform init
-    #   working-directory: terraform
+    - name: Terraform Init
+      run: terraform init
+      working-directory: terraform
 
-    # - name: Terraform Plan
-    #   run: terraform plan
-    #   working-directory: terraform
+    - name: Terraform Plan
+      run: terraform plan
+      working-directory: terraform
 
-    # - name: Terraform Apply
-    #   run: terraform apply -auto-approve
-    #   working-directory: terraform 
+    - name: Terraform Apply
+      run: terraform apply -auto-approve
+      working-directory: terraform 
       
     - uses: actions/setup-python@v4
       with:
