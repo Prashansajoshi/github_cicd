@@ -68,11 +68,11 @@ jobs:
         sleep 2
 
     - name: Install Tree
-      run: sudo apt install tree --no-interactive
+      run: sudo apt install tree -y
 
     - name: Tree
       run: tree
-      
+
     - name: Ansible Inventory
       run: |
         ansible-inventory -i ansible/aws_ec2.yaml --graph 
