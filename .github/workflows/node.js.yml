@@ -54,11 +54,15 @@ jobs:
     - name: Ansible Version
       run: echo "ansible version=$(ansible --version)"
 
+    - name: Install ansible requirements
+      run: pip3 install -r ansible/requirements.txt
+
     - name: Ensure botocore and boto3 modules are installed
       run : pip install boto3 botocore
 
     - name: ansible graph
       run: ansible-inventory -i ansible/aws_ec2.yaml --graph
+
 
     # - name: Run Ansible Playbook
     #   run: ansible-playbook -i aws_ec2.yaml configure.yaml
