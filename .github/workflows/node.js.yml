@@ -59,8 +59,7 @@ jobs:
 
     - name: ansible graph
       run: | 
-        ls -la
-        ansible-inventory -i aws_ec2.yaml --graph
+        ansible-inventory -i aws_ec2.yaml --graph -vvv
       working-directory: ansible
 
 
