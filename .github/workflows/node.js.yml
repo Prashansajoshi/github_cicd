@@ -32,3 +32,6 @@ jobs:
       uses: hashicorp/setup-terraform@v2
       with:
         terraform_wrapper: false
+
+    - name: Terraform Version
+      run: echo "Terraform version=$(terraform --version)"
