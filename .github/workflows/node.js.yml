@@ -60,7 +60,8 @@ jobs:
     - name: ansible graph
       run: | 
         ls -la
-        ansible-inventory -i ansible/aws_ec2.yaml --graph
+        ansible-inventory -i aws_ec2.yaml --graph
+      working-directory: ansible
 
 
     # - name: Run Ansible Playbook
