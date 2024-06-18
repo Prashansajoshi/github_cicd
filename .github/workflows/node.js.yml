@@ -54,9 +54,6 @@ jobs:
     - name: Ansible Version
       run: echo "ansible version=$(ansible --version)"
 
-    - name: Install ansible requirements
-      run: pip3 install -r ansible/requirements.txt
-
     - name: Ensure botocore and boto3 modules are installed
       run : pip install boto3 botocore
 
