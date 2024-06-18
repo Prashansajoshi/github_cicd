@@ -60,8 +60,8 @@ jobs:
     - name: ansible graph
       run: ansible-inventory -i aws_ec2.yaml --graph
 
-    - name: Run Ansible Playbook
-      run: ansible-playbook -i aws_ec2.yaml configure.yaml
-      working-directory: ansible
-      env:
-        ANSIBLE_HOST_KEY_CHECKING: false
+    # - name: Run Ansible Playbook
+    #   run: ansible-playbook -i aws_ec2.yaml configure.yaml
+    #   working-directory: ansible
+    #   env:
+    #     ANSIBLE_HOST_KEY_CHECKING: false
