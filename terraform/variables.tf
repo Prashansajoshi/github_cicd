@@ -14,9 +14,9 @@ variable "key_name" {
 }
 
 variable "my_subnet" {
-  default = "subnet-00eacae223afa4b95"
+  default = "subnet-06a6888436ec66085"
 }
 
 variable "sg_id" {
-  default = "sg-011184c8e3bb3b445"
+  default = "sg-0238e3e6c8caec2d3"
 }
