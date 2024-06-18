@@ -49,7 +49,7 @@ jobs:
       working-directory: terraform 
 
     - name: Install ansible
-      run: pip install ansible  
+      run: pip install ansible  == 2.16.5
 
     - name: Ansible Version
       run: echo "ansible version=$(ansible --version)"
