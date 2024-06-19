@@ -37,6 +37,7 @@
       register: db_tables
       changed_when: false
       failed_when: db_tables.stdout != ''
+      becomes: true
 
 
     - name: Debug - Show database tables output
