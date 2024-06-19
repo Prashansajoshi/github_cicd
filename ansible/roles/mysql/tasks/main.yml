@@ -45,9 +45,9 @@
     #     var: db_tables.stdout
 
 
-    - name: Restore database
-      mysql_db:
-        name: "{{ DB_NAME }}"
-        state: import
-        target: /home/ubuntu/Node_Project/db.sql
+    # - name: Restore database
+    #   mysql_db:
+    #     name: "{{ DB_NAME }}"
+    #     state: import
+    #     target: /home/ubuntu/Node_Project/db.sql
       # when: db_tables.stdout == ''
